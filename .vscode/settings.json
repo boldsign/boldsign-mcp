@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.sortImports": "always",
+        "source.removeUnusedImports": "always",
+        "source.organizeImports": "always",
+    },
+    "prettier.singleQuote": false,
+}
