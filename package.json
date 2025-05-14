@@ -1,0 +1,55 @@
+{
+  "name": "@boldsign/mcp",
+  "version": "0.0.1",
+  "description": "Model Context Protocol (MCP) server for BoldSign API",
+  "license": "MIT",
+  "author": "Syncfusion",
+  "homepage": "https://boldsign.com",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/boldsign/boldsign-mcp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boldsign/boldsign-mcp.git"
+  },
+  "bin": {
+    "boldsign-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run format && tsc",
+    "format": "prettier --write ./src",
+    "watch": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "boldsign",
+    "boldsign-ai",
+    "boldsign-mcp",
+    "mcp",
+    "boldsign-nodejs-mcp",
+    "boldsign-contacts-api",
+    "boldsign-users-api",
+    "boldsign-teams-api",
+    "boldsign-documents-api",
+    "boldsign-templates-api"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "boldsign": "^1.0.0-beta.5",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "axios": "^1.9.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
