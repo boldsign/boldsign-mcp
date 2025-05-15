@@ -21,16 +21,6 @@ Before you begin, ensure you have the following installed and set up:
 
 This section provides instructions on how to configure popular MCP clients to connect to the BoldSign MCP server. You will need to add the relevant configuration snippet to your client's settings or configuration file.
 
-### Command Line Usage
-
-If you install this package globally (e.g., with `npm install -g @boldsign/mcp`), you can invoke the CLI directly using:
-
-```
-boldsign-mcp
-```
-
-Alternatively, you can use `npx -y @boldsign/mcp` without a global install.
-
 ### Environment Variables
 
 You will need to configure the following environment variables for the BoldSign MCP server to function correctly:

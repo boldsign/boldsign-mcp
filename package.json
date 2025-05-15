@@ -18,10 +18,9 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run format && tsc",
+    "build": "tsc",
     "format": "prettier --write ./src",
-    "watch": "tsc --watch",
-    "prepare": "npm run build"
+    "watch": "tsc --watch"
   },
   "files": [
     "dist"
