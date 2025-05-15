@@ -8,6 +8,10 @@ An MCP server designed to facilitate interaction between Large Language Models (
 
 This project contains various tools that interact with the BoldSign API to manage templates and documents for your e-signature.
 
+<a href="https://glama.ai/mcp/servers/@boldsign/boldsign-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@boldsign/boldsign-mcp/badge" alt="boldsign MCP server" />
+</a>
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed and set up:
