@@ -20,7 +20,8 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier --write ./src",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "debug": "npx @modelcontextprotocol/inspector node ./dist/index.js"
   },
   "files": [
     "dist"

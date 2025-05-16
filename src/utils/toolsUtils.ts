@@ -1,21 +1,12 @@
 import type { AxiosError } from 'axios';
 import type { HttpError } from 'boldsign';
 import { McpErrorResponse, McpOkResponse } from '../utils/types.js';
-import { logError, logInfo, toJsonString } from '../utils/utils.js';
-import Configuration from './configuration.js';
 
 export function handleMcpResponse(content: McpOkResponse): McpOkResponse {
-  if (Configuration.getInstance()?.isLoggingEnabled() === true) {
-    logInfo(toJsonString(content));
-  }
-
   return content;
 }
 
 export function handleMcpError(error: any): McpErrorResponse {
-  // Perform tasks with the error response.
-  logError(error);
-
   const axiosError = error as AxiosError | HttpError;
   if (axiosError && axiosError.response) {
     return {

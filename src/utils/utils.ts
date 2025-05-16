@@ -1,29 +1,8 @@
-import { mcpServer } from '../index.js';
 import { NullOrUndefined } from '../utils/types.js';
 
-export function logInfo(message: string) {
-  mcpServer.server.sendLoggingMessage({
-    level: 'info',
-    data: message,
-  });
-}
-
-export function logError(error: any) {
-  mcpServer.server.sendLoggingMessage({
-    level: 'error',
-    data: error,
-  });
-}
-
-export function stringEquals(
-  value1: string | NullOrUndefined,
-  value2: string | NullOrUndefined,
-  ignoreCase?: boolean | false,
-): boolean {
+export function stringEquals(value1: string | NullOrUndefined, value2: string | NullOrUndefined): boolean {
   return isNotNullOrUndefined(value1) && isNotNullOrUndefined(value2)
-    ? ignoreCase
-      ? value1!!.toUpperCase() === value2!!.toUpperCase()
-      : value1!! === value2!!
+    ? value1!!.toUpperCase() === value2!!.toUpperCase()
     : false;
 }
 

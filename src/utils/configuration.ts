@@ -1,5 +1,5 @@
 import { Region } from './types.js';
-import { isNullOrUndefined } from './utils.js';
+import { isNullOrUndefined, stringEquals } from './utils.js';
 
 class Configuration {
   private static US_REGION_BASE_PATH: string = 'https://api.boldsign.com';
@@ -40,7 +40,7 @@ class Configuration {
       this.basePath = Configuration.US_REGION_BASE_PATH;
     }
 
-    this.enableLogging = logging ?? process.env[Configuration.BOLDSIGN_LOGGING] === 'TRUE';
+    this.enableLogging = logging ?? stringEquals(process.env[Configuration.BOLDSIGN_LOGGING], 'TRUE');
   }
 
   public static getInstance(): Configuration {
