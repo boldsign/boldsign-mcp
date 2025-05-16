@@ -1,4 +1,4 @@
-import { returnTypeT, TemplateApi, TemplateRecords } from 'boldsign';
+import { TemplateApi, TemplateRecords } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -70,7 +70,7 @@ async function listTemplatesHandler(payload: ListTemplatesSchemaType): Promise<M
     const templateApi = new TemplateApi();
     templateApi.basePath = configuration.getBasePath();
     templateApi.setApiKey(configuration.getApiKey());
-    const templateRecords: returnTypeT<TemplateRecords> = await templateApi.listTemplates(
+    const templateRecords: TemplateRecords = await templateApi.listTemplates(
       payload.page,
       payload.templateType ?? undefined,
       payload.pageSize ?? undefined,
@@ -82,10 +82,9 @@ async function listTemplatesHandler(payload: ListTemplatesSchemaType): Promise<M
       payload.endDate ?? undefined,
       payload.brandIds ?? undefined,
     );
-    setAsTemplate(templateRecords.response.data.result);
+    setAsTemplate(templateRecords.result);
     return handleMcpResponse({
-      statusCode: templateRecords.response.status,
-      data: templateRecords.response.data,
+      data: templateRecords,
     });
   } catch (error: any) {
     return handleMcpError(error);

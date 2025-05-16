@@ -1,4 +1,4 @@
-import { returnTypeT, TemplateApi, TemplateProperties } from 'boldsign';
+import { TemplateApi, TemplateProperties } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -30,12 +30,9 @@ async function getTemplatePropertiesHandler(payload: GetTemplatePropertiesSchema
     const templateApi = new TemplateApi();
     templateApi.basePath = configuration.getBasePath();
     templateApi.setApiKey(configuration.getApiKey());
-    const templateResponse: returnTypeT<TemplateProperties> = await templateApi.getProperties(
-      payload.templateId,
-    );
+    const templateProperties: TemplateProperties = await templateApi.getProperties(payload.templateId);
     return handleMcpResponse({
-      statusCode: templateResponse.response.status,
-      data: templateResponse.response.data,
+      data: templateProperties,
     });
   } catch (error: any) {
     return handleMcpError(error);

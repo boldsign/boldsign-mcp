@@ -1,22 +1,8 @@
 import { NullOrUndefined } from '../utils/types.js';
 
-export function logResponse(message: string) {
-  return console.log(message);
-}
-
-export function logError(error: any) {
-  return console.error(error);
-}
-
-export function stringEquals(
-  value1: string | NullOrUndefined,
-  value2: string | NullOrUndefined,
-  ignoreCase?: boolean | false,
-): boolean {
+export function stringEquals(value1: string | NullOrUndefined, value2: string | NullOrUndefined): boolean {
   return isNotNullOrUndefined(value1) && isNotNullOrUndefined(value2)
-    ? ignoreCase
-      ? value1!!.toUpperCase() === value2!!.toUpperCase()
-      : value1!! === value2!!
+    ? value1!!.toUpperCase() === value2!!.toUpperCase()
     : false;
 }
 

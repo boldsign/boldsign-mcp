@@ -46,7 +46,6 @@ async function revokeDocumentHandler(payload: RevokeDocumentSchemaType): Promise
       revokeDocumentRequest,
     );
     return handleMcpResponse({
-      statusCode: documentResponse.response.status,
       data: documentResponse.response.data,
     });
   } catch (error: any) {

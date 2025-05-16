@@ -1,4 +1,4 @@
-import { DocumentApi } from 'boldsign';
+import { DocumentApi, DocumentProperties } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -30,10 +30,9 @@ async function getDocumentPropertiesHandler(payload: GetDocumentPropertiesSchema
     const documentApi = new DocumentApi();
     documentApi.basePath = configuration.getBasePath();
     documentApi.setApiKey(configuration.getApiKey());
-    const documentResponse = await documentApi.getProperties(payload.documentId);
+    const documentProperties: DocumentProperties = await documentApi.getProperties(payload.documentId);
     return handleMcpResponse({
-      statusCode: documentResponse.response.status,
-      data: documentResponse.response.data,
+      data: documentProperties,
     });
   } catch (error: any) {
     return handleMcpError(error);
