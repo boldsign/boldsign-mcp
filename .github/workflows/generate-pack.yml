@@ -1,4 +1,4 @@
-name: Generate NPM Pack on Merge to Main
+name: Generate package
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-pack:
+  build-and-pack:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run build
+        run: npm run build
 
       - name: Generate npm pack file
         run: npm pack
