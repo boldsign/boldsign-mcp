@@ -32,6 +32,8 @@ You will need to configure the following environment variables for the BoldSign 
   - `US` for the United States region.
 
   - `EU` for the Europe region.
+    
+  - `CA` for the Canada region.
 
 ### Install in Cursor
 
