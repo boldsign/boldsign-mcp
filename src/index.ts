@@ -10,7 +10,7 @@ import { logInfo, toJsonString } from './utils/utils.js';
 
 export const mcpServer = new McpServer(
   { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
-  { capabilities: { tools: {}, resources: {}, prompts: {} } },
+  { capabilities: { tools: {}, resources: {}, prompts: {}, completions: {}, logging: {} } },
 );
 
 definitions.forEach((toolDefinition: BoldSignTool) => {
