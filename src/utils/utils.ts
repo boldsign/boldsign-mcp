@@ -1,11 +1,18 @@
+import { mcpServer } from '../index.js';
 import { NullOrUndefined } from '../utils/types.js';
 
-export function logResponse(message: string) {
-  return console.log(message);
+export function logInfo(message: string) {
+  mcpServer.server.sendLoggingMessage({
+    level: 'info',
+    data: message,
+  });
 }
 
 export function logError(error: any) {
-  return console.error(error);
+  mcpServer.server.sendLoggingMessage({
+    level: 'error',
+    data: error,
+  });
 }
 
 export function stringEquals(
