@@ -4,6 +4,7 @@ import { isNullOrUndefined } from './utils.js';
 class Configuration {
   private static US_REGION_BASE_PATH: string = 'https://api.boldsign.com';
   private static EU_REGION_BASE_PATH: string = 'https://api-eu.boldsign.com';
+  private static CA_REGION_BASE_PATH: string = 'https://api-ca.boldsign.com';
   private static BOLDSIGN_API_KEY: string = 'BOLDSIGN_API_KEY';
   private static BOLDSIGN_LOGGING: string = 'BOLDSIGN_LOGGING';
 
@@ -26,6 +27,10 @@ class Configuration {
         switch (region as Region) {
           case 'EU': {
             this.basePath = Configuration.EU_REGION_BASE_PATH;
+            break;
+          }
+          case 'CA': {
+            this.basePath = Configuration.CA_REGION_BASE_PATH;
             break;
           }
           case 'US':
