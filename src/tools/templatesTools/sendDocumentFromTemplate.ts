@@ -1,4 +1,4 @@
-import { DocumentCreated, returnTypeT, Role, SendForSignFromTemplateForm, TemplateApi } from 'boldsign';
+import { DocumentCreated, Role, SendForSignFromTemplateForm, TemplateApi } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -215,31 +215,27 @@ async function sendDocumentFromTemplateDynamicHandler(
     templateApi.basePath = configuration.getBasePath();
     templateApi.setApiKey(configuration.getApiKey());
     const roles = getRolesFromRequestPayload(payload);
-    const sendTemplateResponse: returnTypeT<DocumentCreated> = await templateApi.sendUsingTemplate(
-      payload.templateId,
-      {
-        fileUrls: payload.body.fileUrls,
-        title: payload.body.title ?? undefined,
-        message: payload.body.message ?? undefined,
-        roles: roles,
-        brandId: payload.body.brandId ?? undefined,
-        disableEmails: payload.body.disableEmails ?? undefined,
-        disableSMS: payload.body.disableSMS ?? undefined,
-        hideDocumentId: payload.body.hideDocumentId ?? undefined,
-        reminderSettings: payload.body.reminderSettings ?? undefined,
-        cc: payload.body.cc ?? undefined,
-        expiryDays: payload.body.expiryDays ?? undefined,
-        enablePrintAndSign: payload.body.enablePrintAndSign ?? undefined,
-        enableReassign: payload.body.enableReassign ?? undefined,
-        enableSigningOrder: payload.body.enableSigningOrder ?? undefined,
-        disableExpiryAlert: payload.body.disableExpiryAlert ?? undefined,
-        scheduledSendTime: payload.body.scheduledSendTime ?? undefined,
-        allowScheduledSend: payload.body.allowScheduledSend ?? undefined,
-      } as SendForSignFromTemplateForm,
-    );
+    const documentCreated: DocumentCreated = await templateApi.sendUsingTemplate(payload.templateId, {
+      fileUrls: payload.body.fileUrls,
+      title: payload.body.title ?? undefined,
+      message: payload.body.message ?? undefined,
+      roles: roles,
+      brandId: payload.body.brandId ?? undefined,
+      disableEmails: payload.body.disableEmails ?? undefined,
+      disableSMS: payload.body.disableSMS ?? undefined,
+      hideDocumentId: payload.body.hideDocumentId ?? undefined,
+      reminderSettings: payload.body.reminderSettings ?? undefined,
+      cc: payload.body.cc ?? undefined,
+      expiryDays: payload.body.expiryDays ?? undefined,
+      enablePrintAndSign: payload.body.enablePrintAndSign ?? undefined,
+      enableReassign: payload.body.enableReassign ?? undefined,
+      enableSigningOrder: payload.body.enableSigningOrder ?? undefined,
+      disableExpiryAlert: payload.body.disableExpiryAlert ?? undefined,
+      scheduledSendTime: payload.body.scheduledSendTime ?? undefined,
+      allowScheduledSend: payload.body.allowScheduledSend ?? undefined,
+    } as SendForSignFromTemplateForm);
     return handleMcpResponse({
-      statusCode: sendTemplateResponse.response.status,
-      data: sendTemplateResponse.response.data,
+      data: documentCreated,
     });
   } catch (error: any) {
     return handleMcpError(error);

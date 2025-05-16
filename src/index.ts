@@ -10,7 +10,7 @@ import { toJsonString } from './utils/utils.js';
 async function runServer() {
   const server = new McpServer(
     { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
-    { capabilities: { tools: {} } },
+    { capabilities: { tools: {}, resources: {}, prompts: {} } },
   );
   definitions.forEach((toolDefinition: BoldSignTool) => {
     server.tool(

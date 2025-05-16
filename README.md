@@ -6,7 +6,7 @@
 
 An MCP server designed to facilitate interaction between Large Language Models (LLMs) and the BoldSign API. The Model Context Protocol (MCP) extends LLM capabilities, enabling them to act as agents when connecting with external systems.
 
-This project contains various tools that interact with the BoldSign API to manage templates and documents.
+This project contains various tools that interact with the BoldSign API to manage templates and documents for your e-signature.
 
 ## Prerequisites
 

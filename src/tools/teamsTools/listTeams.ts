@@ -1,4 +1,4 @@
-import { returnTypeT, TeamListResponse, TeamsApi } from 'boldsign';
+import { TeamListResponse, TeamsApi } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -36,14 +36,13 @@ async function listTeamsHandler(payload: ListTeamsSchemaType): Promise<McpRespon
     const teamsApi = new TeamsApi();
     teamsApi.basePath = configuration.getBasePath();
     teamsApi.setApiKey(configuration.getApiKey());
-    const listTeamsResponse: returnTypeT<TeamListResponse> = await teamsApi.listTeams(
+    const teamListResponse: TeamListResponse = await teamsApi.listTeams(
       payload.page,
       payload.pageSize ?? undefined,
       payload.searchKey ?? undefined,
     );
     return handleMcpResponse({
-      statusCode: listTeamsResponse.response.status,
-      data: listTeamsResponse.response.data,
+      data: teamListResponse,
     });
   } catch (error: any) {
     return handleMcpError(error);

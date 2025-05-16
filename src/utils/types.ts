@@ -11,7 +11,6 @@ export interface BoldSignTool {
 }
 
 export interface McpOkResponse {
-  readonly statusCode: number | null;
   readonly data: any;
 }
 

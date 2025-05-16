@@ -1,4 +1,4 @@
-import { DocumentApi } from 'boldsign';
+import { DocumentApi, DocumentRecords } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -108,7 +108,7 @@ async function listDocumentsHandler(payload: ListDocumentsSchemaType): Promise<M
     const documentApi = new DocumentApi();
     documentApi.basePath = configuration.getBasePath();
     documentApi.setApiKey(configuration.getApiKey());
-    const listDocumentsResponse = await documentApi.listDocuments(
+    const documentRecords: DocumentRecords = await documentApi.listDocuments(
       payload.page,
       payload.sentBy ?? undefined,
       payload.recipients ?? undefined,
@@ -124,8 +124,7 @@ async function listDocumentsHandler(payload: ListDocumentsSchemaType): Promise<M
       payload.brandIds ?? undefined,
     );
     return handleMcpResponse({
-      statusCode: listDocumentsResponse.response.status,
-      data: listDocumentsResponse.response.data,
+      data: documentRecords,
     });
   } catch (error: any) {
     return handleMcpError(error);

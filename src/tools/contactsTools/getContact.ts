@@ -1,4 +1,4 @@
-import { ContactsApi, ContactsDetails, returnTypeT } from 'boldsign';
+import { ContactsApi, ContactsDetails } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -30,10 +30,9 @@ async function getContactHandler(payload: GetContactSchemaType): Promise<McpResp
     const contactsApi = new ContactsApi();
     contactsApi.basePath = configuration.getBasePath();
     contactsApi.setApiKey(configuration.getApiKey());
-    const contact: returnTypeT<ContactsDetails> = await contactsApi.getContact(payload.id);
+    const contactsDetails: ContactsDetails = await contactsApi.getContact(payload.id);
     return handleMcpResponse({
-      statusCode: contact.response.status,
-      data: contact.response.data,
+      data: contactsDetails,
     });
   } catch (error: any) {
     return handleMcpError(error);

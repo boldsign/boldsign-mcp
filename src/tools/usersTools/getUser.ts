@@ -1,4 +1,4 @@
-import { returnTypeT, UserApi, UserProperties } from 'boldsign';
+import { UserApi, UserProperties } from 'boldsign';
 import { z } from 'zod';
 import * as commonSchema from '../../utils/commonSchema.js';
 import { configuration } from '../../utils/constants.js';
@@ -29,10 +29,9 @@ async function getUserHandler(payload: GetUserSchemaType): Promise<McpResponse> 
     const userApi = new UserApi();
     userApi.basePath = configuration.getBasePath();
     userApi.setApiKey(configuration.getApiKey());
-    const userResponse: returnTypeT<UserProperties> = await userApi.getUser(payload.userId);
+    const userProperties: UserProperties = await userApi.getUser(payload.userId);
     return handleMcpResponse({
-      statusCode: userResponse.response.status,
-      data: userResponse.response.data,
+      data: userProperties,
     });
   } catch (error: any) {
     return handleMcpError(error);
