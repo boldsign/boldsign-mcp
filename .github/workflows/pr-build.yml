@@ -1,4 +1,4 @@
-name: Check build
+name: PR build
 
 on:
   pull_request:
@@ -21,6 +21,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run Prettier check
+        run: npx prettier ./src --check
 
       - name: Run build
         run: npm run build
