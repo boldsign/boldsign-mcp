@@ -46,7 +46,7 @@ Alternatively, you can install it for a specific project by creating a `.cursor/
       "command": "npx",
       "args": ["-y", "@boldsign/mcp"],
       "env": {
-        "BOLDSIGN_API_KEY": "{YOUR_BOLDSIGN_API_KEY}",
+        "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
         "BOLDSIGN_API_REGION": "US"
       }
     }
@@ -67,7 +67,7 @@ Add the following configuration snippet to your Windsurf MCP configuration file:
       "command": "npx",
       "args": ["-y", "@boldsign/mcp"],
       "env": {
-        "BOLDSIGN_API_KEY": "{YOUR_BOLDSIGN_API_KEY}",
+        "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
         "BOLDSIGN_API_REGION": "US"
       }
     }
@@ -89,7 +89,7 @@ Add the following configuration to the VS Code settings file where you manage MC
       "command": "npx",
       "args": ["-y", "@boldsign/mcp"],
       "env": {
-        "BOLDSIGN_API_KEY": "{YOUR_BOLDSIGN_API_KEY}",
+        "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
         "BOLDSIGN_API_REGION": "US"
       }
     }
@@ -110,7 +110,7 @@ Add the following configuration to your Claude Desktop configuration file, which
       "command": "npx",
       "args": ["-y", "@boldsign/mcp"],
       "env": {
-        "BOLDSIGN_API_KEY": "{YOUR_BOLDSIGN_API_KEY}",
+        "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
         "BOLDSIGN_API_REGION": "US"
       }
     }
@@ -131,7 +131,7 @@ Add the following configuration snippet to your Cline MCP configuration file.
       "command": "npx",
       "args": ["-y", "@boldsign/mcp"],
       "env": {
-        "BOLDSIGN_API_KEY": "{YOUR_BOLDSIGN_API_KEY}",
+        "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
         "BOLDSIGN_API_REGION": "US"
       }
     }
