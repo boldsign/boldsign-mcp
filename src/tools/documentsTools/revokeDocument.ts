@@ -11,10 +11,9 @@ const RevokeDocumentSchema = z.object({
     'Required. The unique identifier (ID) of the document to revoke. This can be obtained from the list documents tool.',
   ),
   message: z.string().describe('The exact reason for performing a revoke action.'),
-  onBehalfOf: z
-    .string()
-    .email()
-    .describe('Email address of on-behalf sender.')
+  onBehalfOf: commonSchema.EmailSchema
+    .optional()
+    .nullable()
     .describe(
       'Optional. Email address of the sender when creating a document on their behalf. This email can be retrieved from the `behalfOf` property in the get document or list documents tool.',
     ),
