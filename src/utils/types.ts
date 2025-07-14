@@ -1,6 +1,6 @@
 import { AnyZodObject } from 'zod';
 
-export type Region = 'US' | 'EU';
+export type Region = 'US' | 'EU' | 'CA';
 
 export interface BoldSignTool {
   method: string;
