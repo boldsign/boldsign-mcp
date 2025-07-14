@@ -51,13 +51,13 @@ async function sendReminderForDocumentSignHandler(
     const reminderMessage: ReminderMessage = new ReminderMessage();
     reminderMessage.message = payload.message ?? undefined;
     reminderMessage.onBehalfOf = payload.onBehalfOf ?? undefined;
-    const documentResponse: returnTypeI = await documentApi.remindDocument(
+    const response: returnTypeI = await documentApi.remindDocument(
       payload.documentId,
       payload.receiverEmails ?? undefined,
       reminderMessage,
     );
     return handleMcpResponse({
-      data: documentResponse.response.data,
+      data: response,
     });
   } catch (error: any) {
     return handleMcpError(error);
