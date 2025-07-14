@@ -33,6 +33,8 @@ You will need to configure the following environment variables for the BoldSign 
 
   - `EU` for the Europe region.
 
+  - `CA` for the Canada region.
+
 ### Install in Cursor
 
 The recommended approach is to add the following configuration to your global Cursor MCP configuration file, typically found at `~/.cursor/mcp.json`.

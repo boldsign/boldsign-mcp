@@ -21,7 +21,7 @@ This guide is designed for AI agents and users to install and configure the Bold
 Before configuring your MCP client, ensure the following environment variables are set:
 
 - `BOLDSIGN_API_KEY` — Your BoldSign API key. (You may ask the user to provide it in the chat or let them configure it on their own.)
-- `BOLDSIGN_API_REGION` — The region for your BoldSign account (`US` or `EU`). Defaults to `US`. (You may ask if their account resides in a region other than `US` and switch based on that.)
+- `BOLDSIGN_API_REGION` — The region for your BoldSign account (`US` or `EU` or `CA`). Defaults to `US`. (You may ask if their account resides in a region other than `US` and switch based on that.)
 
 ---
 
@@ -183,7 +183,7 @@ Common issues and solutions:
 ## Environment Variables
 
 - `BOLDSIGN_API_KEY`: Your BoldSign API key ([how to obtain](https://developers.boldsign.com/authentication/api-key))
-- `BOLDSIGN_API_REGION`: The region for your BoldSign account (`US` or `EU`). Defaults to `US`.
+- `BOLDSIGN_API_REGION`: The region for your BoldSign account (`US` or `EU` or `CA`). Defaults to `US`.
 
 ---
 

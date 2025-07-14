@@ -1,6 +1,6 @@
 {
   "name": "@boldsign/mcp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Model Context Protocol (MCP) server for BoldSign API",
   "license": "MIT",
   "author": "Syncfusion",
