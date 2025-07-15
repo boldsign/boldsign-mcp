@@ -20,8 +20,7 @@ const SendReminderForDocumentSignSchema = z.object({
   message: commonSchema.OptionalStringSchema.describe(
     'Optional. Message to be sent in the reminder email. If not provided, the system will use a default reminder message.',
   ),
-  onBehalfOf: commonSchema.EmailSchema
-    .optional()
+  onBehalfOf: commonSchema.EmailSchema.optional()
     .nullable()
     .describe(
       'Optional. Email address of the sender when creating a document on their behalf. This email can be retrieved from the `behalfOf` property in the get document or list documents tool.',
