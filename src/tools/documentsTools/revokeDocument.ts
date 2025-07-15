@@ -40,12 +40,12 @@ async function revokeDocumentHandler(payload: RevokeDocumentSchemaType): Promise
     const revokeDocumentRequest: RevokeDocument = new RevokeDocument();
     revokeDocumentRequest.message = payload.message;
     revokeDocumentRequest.onBehalfOf = payload.onBehalfOf;
-    const response: returnTypeI = await documentApi.revokeDocument(
+    const documentResponse: returnTypeI = await documentApi.revokeDocument(
       payload.documentId,
       revokeDocumentRequest,
     );
     return handleMcpResponse({
-      data: response,
+      data: documentResponse?.response?.data ?? documentResponse,
     });
   } catch (error: any) {
     return handleMcpError(error);
