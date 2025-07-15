@@ -15,7 +15,7 @@ const SendReminderForDocumentSignSchema = z.object({
     .optional()
     .nullable()
     .describe(
-      'Optional. One or more signer email addresses to send reminders for pending signatures. If multiple signers are required to sign the document, specify their email addresses. If there is not emails provided, it will send reminder to all pending signers.',
+      'Optional. One or more signer email addresses to send reminders for pending signatures. If multiple signers are required to sign the document, specify their email addresses. If there is not emails provided, it will send reminder to all pending signers. The signers of a document can be obtained from the document-properties tool, using the documentId.',
     ),
   message: commonSchema.OptionalStringSchema.describe(
     'Optional. Message to be sent in the reminder email. If not provided, the system will use a default reminder message.',
@@ -56,7 +56,7 @@ async function sendReminderForDocumentSignHandler(
       reminderMessage,
     );
     return handleMcpResponse({
-      data: documentResponse.response.data,
+      data: documentResponse?.response?.data ?? documentResponse,
     });
   } catch (error: any) {
     return handleMcpError(error);
