@@ -8,12 +8,8 @@ import ToolNames from '../toolNames.js';
 import { setAsTemplate } from './transforms.js';
 
 const ListTemplatesSchema = z.object({
-  pageSize: commonSchema.OptionalPageSizeSchema.default(10).describe(
-    'Optional. Specifies the number of templates to retrieve per page. The value must be an integer between 1 and 100. If not provided, the BoldSign API defaults to a page size of 10.',
-  ),
-  page: commonSchema.PageSchema.describe(
-    'Required. The page number to retrieve the templates list. Used for pagination to navigate through the list of available templates.',
-  ),
+  pageSize: z.number().int().min(1).max(100),
+  page: z.number().int().min(1).default(1),
   searchKey: commonSchema.OptionalStringSchema.describe(
     'Optional. A search key to filter templates by properties such as name and email address. Provides a way to refine results based on specific criteria.',
   ),

@@ -30,21 +30,7 @@ export const OptionalPhoneNumberWithCodeSchema = z
   .optional()
   .nullable();
 
-export const OptionalPageSizeSchema = z
-  .number({ message: 'A page size > 0 is required.' })
-  .int()
-  .min(1)
-  .max(100)
-  .optional()
-  .nullable();
-
-export const OptionalPageSchema = z
-  .number({ message: 'A page number > 0 is required.' })
-  .int()
-  .min(1)
-  .default(1)
-  .optional()
-  .nullable();
+export const OptionalPageSizeSchema = z.number().int().min(1).max(100).optional().nullable();
 
 export const OptionalDateSchema: z.ZodNullable<z.ZodOptional<z.ZodDate>> = z.date().optional().nullable();
 
@@ -61,9 +47,8 @@ export const PhoneNumberWithCodeSchema = z.object({
   number: z.string().describe('Phone number.'),
 });
 
-export const PageSizeSchema = z.number({ message: 'A page size > 0 is required.' }).int().min(1).max(100);
-
-export const PageSchema = z.number({ message: 'A page number > 0 is required.' }).int().min(1).default(1);
+export const PageSizeSchema = z.number().int().min(1).max(100);
+export const PageSchema = z.number().int().min(1).default(1);
 
 // Metadata related schema.
 

@@ -7,12 +7,8 @@ import { BoldSignTool, McpResponse } from '../../utils/types.js';
 import ToolNames from '../toolNames.js';
 
 const ListUsersSchema = z.object({
-  pageSize: commonSchema.OptionalPageSizeSchema.default(10).describe(
-    'Optional. Specifies the maximum number of user records to be retrieved per page. If not provided, a default page size will be used by the BoldSign API. The value must be between 1 and 100. The default value is 10.',
-  ),
-  page: commonSchema.PageSchema.describe(
-    'Required. The page number of the user list to retrieve. Used for pagination to navigate through the list of available users.',
-  ),
+  pageSize: z.number().int().min(1).max(100),
+  page: z.number().int().min(1).default(1),
   search: commonSchema.OptionalStringSchema.describe(
     'Optional. A string used to filter the user list. The API will return contacts whose details contain this search term.',
   ),
