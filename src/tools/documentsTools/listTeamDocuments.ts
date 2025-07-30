@@ -7,12 +7,8 @@ import { BoldSignTool, McpResponse } from '../../utils/types.js';
 import ToolNames from '../toolNames.js';
 
 const ListTeamDocumentsSchema = z.object({
-  pageSize: commonSchema.OptionalPageSizeSchema.default(10).describe(
-    'Optional. The maximum number of team documents to display per page. Defaults to 10 but can be set between 1 and 100.',
-  ),
-  page: commonSchema.PageSchema.describe(
-    'Required. The page number to retrieve, starting from 1. Used for pagination to navigate through the list of available team documents.',
-  ),
+  pageSize: z.number().int().min(1).max(100),
+  page: z.number().int().min(1).default(1),
   searchKey: commonSchema.OptionalStringSchema.describe(
     'Optional. A search term used to filter the document list. The API will return documents matching details like document title, document ID, sender name, or recipient name.',
   ),

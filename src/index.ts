@@ -1,34 +1,67 @@
 #!/usr/bin/env node
 
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import {
+  CallToolRequestSchema,
+  ErrorCode,
+  ListToolsRequestSchema,
+  McpError,
+} from '@modelcontextprotocol/sdk/types.js';
 import { definitions } from './tools/index.js';
-import { MCP_SERVER_NAME, MCP_SERVER_VERSION } from './utils/constants.js';
 import { BoldSignTool } from './utils/types.js';
-import { toJsonString } from './utils/utils.js';
+import { toJsonString, zodToJsonSchema } from './utils/utils.js';
 
-export const mcpServer = new McpServer(
-  { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
+export const server = new Server(
+  { name: 'boldsign-mcp', version: '0.0.4' },
   { capabilities: { tools: {}, resources: {}, prompts: {}, completions: {}, logging: {} } },
 );
 
-definitions.forEach((toolDefinition: BoldSignTool) => {
-  mcpServer.tool(
-    toolDefinition.method,
-    toolDefinition.description,
-    toolDefinition.inputSchema.shape,
-    async (input, _extra) => {
-      const mcpResponse = await toolDefinition.handler(input);
-      return {
-        content: [{ type: 'text', text: `${toJsonString(mcpResponse)}` }],
-      };
-    },
-  );
+server.onerror = (error) => console.error('[Error]', error);
+
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: definitions.map((toolDefinition: BoldSignTool) => {
+    return {
+      name: toolDefinition.method,
+      description: toolDefinition.description,
+      inputSchema: zodToJsonSchema(toolDefinition.inputSchema),
+    };
+  }),
+}));
+
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const toolName = request.params.name;
+  const tool = definitions.find((t) => t.method === toolName);
+
+  if (!tool) {
+    throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${toolName}`);
+  }
+
+  const args = request.params.arguments;
+  const schemaResult = tool.inputSchema.safeParse(args);
+
+  if (!schemaResult.success) {
+    throw new McpError(
+      ErrorCode.InvalidParams,
+      `Invalid parameters for tool ${toolName}: ${schemaResult.error.message}`,
+    );
+  }
+
+  try {
+    const result = await tool.handler(args);
+    return {
+      content: [{ type: 'text', text: `${toJsonString(result)}` }],
+    };
+  } catch (error) {
+    console.error('[Error] Failed to fetch data:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new McpError(ErrorCode.InternalError, `API error: ${errorMessage}`);
+  }
 });
 
 async function runServer() {
   const transport = new StdioServerTransport();
-  await mcpServer.connect(transport);
+  await server.connect(transport);
 }
 
 runServer().catch((error) => {

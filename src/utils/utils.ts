@@ -1,3 +1,4 @@
+import z from 'zod';
 import { NullOrUndefined } from '../utils/types.js';
 
 export function stringEquals(value1: string | NullOrUndefined, value2: string | NullOrUndefined): boolean {
@@ -24,4 +25,38 @@ export function isNotEmpty(value: string | NullOrUndefined) {
 
 export function isNotNullOrUndefinedOrEmpty(values: any[] | NullOrUndefined) {
   return values !== null && values !== undefined && values.length > 0;
+}
+
+export function zodToJsonSchema<T extends z.ZodTypeAny>(zodSchema: T) {
+  return z.toJSONSchema(zodSchema, {
+    unrepresentable: 'any',
+    target: 'draft-7',
+    override: (ctx) => {
+      const def = ctx.zodSchema._zod.def;
+
+      if (!def || !def?.type) return;
+
+      switch (def.type) {
+        case 'date':
+          ctx.jsonSchema.type = 'string';
+          ctx.jsonSchema.format = 'date-time';
+          break;
+
+        case 'bigint':
+          // BigInt can be represented as string to preserve precision
+          ctx.jsonSchema.type = 'string';
+          ctx.jsonSchema.pattern = '^-?\\d+$';
+          ctx.jsonSchema.description = 'BigInt represented as string';
+          break;
+
+        case 'symbol':
+          ctx.jsonSchema.type = 'string';
+          ctx.jsonSchema.description = 'Symbol represented as string';
+          break;
+
+        default:
+          break;
+      }
+    },
+  });
 }

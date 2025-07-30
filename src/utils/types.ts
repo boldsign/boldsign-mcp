@@ -1,4 +1,4 @@
-import { AnyZodObject } from 'zod';
+import { ZodObject } from 'zod';
 
 export type Region = 'US' | 'EU' | 'CA';
 
@@ -6,7 +6,7 @@ export interface BoldSignTool {
   method: string;
   name: string;
   description: string;
-  inputSchema: AnyZodObject;
+  inputSchema: ZodObject;
   handler(args: unknown): Promise<McpResponse>;
 }
 

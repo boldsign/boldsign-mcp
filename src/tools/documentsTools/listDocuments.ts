@@ -7,26 +7,20 @@ import { BoldSignTool, McpResponse } from '../../utils/types.js';
 import ToolNames from '../toolNames.js';
 
 const ListDocumentsSchema = z.object({
-  pageSize: commonSchema.OptionalPageSizeSchema.default(10).describe(
-    'Optional. The maximum number of documents to display per page. Defaults to 10 but can be set between 1 and 100.',
-  ),
-  page: commonSchema.PageSchema.describe(
-    'Required. The page number to retrieve, starting from 1. Used for pagination to navigate through the list of available documents.',
-  ),
+  pageSize: z.number().int().min(1).max(100),
+  page: z.number().int().min(1).default(1),
   searchKey: commonSchema.OptionalStringSchema.describe(
     'Optional. A search term used to filter the document list. The API will return documents matching details like document title, document ID, sender name, or recipient name.',
   ),
   sentBy: z
     .array(commonSchema.EmailSchema.describe('Email address of the sender.'))
     .optional()
-    .nullable()
     .describe(
       'Optional. Filter documents by sender email addresses. One or more sender email IDs can be specified.',
     ),
   recipients: z
     .array(commonSchema.EmailSchema.describe('Email address of the signer.'))
     .optional()
-    .nullable()
     .describe(
       'Optional. Filter documents by signer email addresses. One or more signer email IDs can be specified.',
     ),
@@ -39,16 +33,17 @@ const ListDocumentsSchema = z.object({
   labels: z
     .array(z.string().describe('Label of the document.'))
     .optional()
-    .nullable()
+    .default([])
     .describe(
       'Optional. Labels associated with documents. Used to filter the list by specific document tags.',
     ),
   transmitType: z
     .enum(['Sent', 'Received', 'Both'])
     .optional()
-    .nullable()
     .default('Both')
-    .describe("Optional. Type of transmission. Can be 'Sent', 'Received', or 'Both'."),
+    .describe(
+      'Optional. Type of transmission to filter documents if the user is both sender, recipient or both.',
+    ),
   status: z
     .array(
       z
@@ -67,24 +62,23 @@ const ListDocumentsSchema = z.object({
         .default('None'),
     )
     .optional()
-    .nullable()
+    .default([])
+    .describe('Optional. Filter documents based on their current status.'),
+  nextCursor: z
+    .number()
+    .optional()
     .describe(
-      "Optional. Filter documents based on their current status. Available statuses include 'WaitingForMe', 'WaitingForOthers', 'NeedAttention', 'Completed', 'Declined', 'Revoked', 'Expired', 'Scheduled', and 'Draft'. Use 'None' to disable status filtering.",
+      'Optional. Cursor value for pagination beyond 10,000 records. Set to the cursor of the last retrieved document.',
     ),
-  nextCursor: commonSchema.OptionalIntegerSchema.describe(
-    'Optional. Cursor value for pagination beyond 10,000 records. Set to the cursor of the last retrieved document.',
-  ),
   brandIds: z
     .array(commonSchema.InputIdSchema.describe('Unique identifier (ID) of the brand.'))
     .optional()
-    .nullable()
     .describe(
       'Optional. Filters documents based on associated brand IDs. Only documents linked to the specified brands will be retrieved.',
     ),
   dateFilterType: z
     .enum(['SentBetween', 'Expiring'])
     .optional()
-    .nullable()
     .describe(
       "Optional. Type of date filter applied to documents. Available options: 'SentBetween' and 'Expiring'.",
     ),

@@ -7,12 +7,8 @@ import { BoldSignTool, McpResponse } from '../../utils/types.js';
 import ToolNames from '../toolNames.js';
 
 const ListTeamsSchema = z.object({
-  pageSize: commonSchema.OptionalPageSizeSchema.default(10).describe(
-    'Optional. Specifies the maximum number of teams to retrieve per page. The value must be an integer between 1 and 100. By default, the BoldSign API retrieves 10 teams per page.',
-  ),
-  page: commonSchema.PageSchema.describe(
-    'Required. The page number to retrieve from the list of teams, starting from 1. Used for pagination to navigate through the list of available teams.',
-  ),
+  pageSize: z.number().int().min(1).max(100),
+  page: z.number().int().min(1).default(1),
   searchKey: commonSchema.OptionalStringSchema.describe(
     'Optional. A search term to filter the list of teams. The API will return teams whose details, such as name, match the provided search term.',
   ),
