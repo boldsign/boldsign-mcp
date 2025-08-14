@@ -1,6 +1,6 @@
 {
   "name": "@boldsign/mcp",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Model Context Protocol (MCP) server for BoldSign API",
   "license": "MIT",
   "author": "Syncfusion",
@@ -31,6 +31,7 @@
     "boldsign-ai",
     "boldsign-mcp",
     "mcp",
+    "ai-agent",
     "boldsign-nodejs-mcp",
     "boldsign-contacts-api",
     "boldsign-users-api",

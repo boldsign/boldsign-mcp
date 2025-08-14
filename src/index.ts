@@ -13,8 +13,8 @@ import { BoldSignTool } from './utils/types.js';
 import { toJsonString, zodToJsonSchema } from './utils/utils.js';
 
 export const server = new Server(
-  { name: 'boldsign-mcp', version: '0.0.4' },
-  { capabilities: { tools: {}, resources: {}, prompts: {}, completions: {}, logging: {} } },
+  { name: 'boldsign-mcp', version: '0.0.5' },
+  { capabilities: { tools: {}, resources: {}, completions: {}, logging: {} } },
 );
 
 server.onerror = (error) => console.error('[Error]', error);
