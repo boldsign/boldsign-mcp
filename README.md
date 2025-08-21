@@ -1,4 +1,5 @@
 # BoldSign MCP Server
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/boldsign/boldsign-mcp)](https://archestra.ai/mcp-catalog/boldsign__boldsign-mcp)
 
 **Author:** Syncfusion
 
